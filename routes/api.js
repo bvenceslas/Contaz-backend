@@ -53,6 +53,16 @@ router.post('/contacts', async (req, res) => {
 });
 
 // edit a contact
+router.put('/contacts/:id', async (req, res) => {
+    let db_query = `UPDATE t_contact SET ? WHERE id = ${req.params.id}`;
+    await db.query(db_query, (err, result) => {
+        if(!err)
+            res.json(result)
+        else
+            throw err;
+    });
+});
+
 
 // delete a contact
 router.delete('/contacts/:id', (req, res) => {
